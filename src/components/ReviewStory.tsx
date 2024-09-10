@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import StorySkeleton from "./StorySkeleton";
 import StoryTextarea from "./StoryTextarea";
 
-export default function Story() {
+export default function ReviewStory() {
   const [isEditing, setIsEditing] = useState(false);
   const { setStory, loading, selectedTopic, setLoading } =
     useMultiFormContext();
@@ -33,7 +33,7 @@ export default function Story() {
   return (
     <>
       <h2 className="bg-gradient-to-r from-[#ff00cc] via-[#7130c3] to-[#410093] bg-clip-text pt-5 text-2xl font-bold text-transparent">
-        Story
+        Review Story
       </h2>
       {!isEditing && (
         <Button

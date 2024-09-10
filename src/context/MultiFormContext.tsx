@@ -65,7 +65,7 @@ export default function MultiFormProvider({
   const steps = [
     { id: "Step 1", name: "Topic Selection" },
     { id: "Step 2", name: "Review Story" },
-    { id: "Step 3", name: "Video Generation" },
+    { id: "Step 3", name: "Review Title" },
     { id: "Step 4", name: "Upload to Youtube" },
   ];
   const delta = currentStep - previousStep;

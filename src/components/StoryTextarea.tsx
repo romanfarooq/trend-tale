@@ -7,6 +7,7 @@ import {
   SelectItem,
 } from "@/components/ui/select";
 import { useMultiFormContext } from "@/context/MultiFormContext";
+import { Label } from "@/components/ui/label";
 
 const voiceOptions = ["alloy", "echo", "fable", "onyx", "nova", "shimmer"];
 const languageOptions = [
@@ -91,11 +92,11 @@ export default function StoryTextarea({
         value={story}
         disabled={!isEditing}
         onChange={(e) => setStory(e.target.value)}
-        className="relative h-32 w-full rounded border border-gray-600 bg-gray-900 p-2 text-gray-300 focus:border-indigo-500 focus:ring-indigo-500"
+        className="relative min-h-32 resize-y w-full rounded border border-gray-600 bg-gray-900 p-2 text-gray-300 focus:border-indigo-500 focus:ring-indigo-500"
       />
       <div className="mt-4 flex flex-row gap-4">
         <div className="flex w-1/2 flex-col gap-2">
-          <label className="text-gray-400">Voices</label>
+          <Label className="text-gray-400">Voices</Label>
           <Select value={selectedVoice} onValueChange={setSelectedVoice}>
             <SelectTrigger className="border-gray-600 bg-gray-900 text-gray-300">
               {selectedVoice || "Select a voice"}
@@ -110,7 +111,7 @@ export default function StoryTextarea({
           </Select>
         </div>
         <div className="flex w-1/2 flex-col gap-2">
-          <label className="text-gray-400">Languages</label>
+          <Label className="text-gray-400">Languages</Label>
           <Select value={selectedLanguage} onValueChange={setSelectedLanguage}>
             <SelectTrigger className="border-gray-600 bg-gray-900 text-gray-300">
               {selectedLanguage || "Select a language"}

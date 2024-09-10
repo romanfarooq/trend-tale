@@ -1,49 +1,56 @@
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { useMultiFormContext } from "@/context/MultiFormContext";
-import { cn } from "@/lib/utils";
+import { useEffect } from "react";
+import axios from "@/api/axiosInstance";
+import Thumbnails from "./Thumbnails";
+import ThumbnailsSkeleton from "./ThumbnailsSkeleton";
 
 export default function Upload() {
-  const { thumbnails, selectedThumbnail, setSelectedThumbnail } =
-    useMultiFormContext();
+  const {
+    selectedThumbnail,
+    setThumbnails,
+    story,
+    title,
+    loading,
+    setLoading,
+  } = useMultiFormContext();
+
+  useEffect(() => {
+    async function fetchThumbnails() {
+      try {
+        const requests = Array.from({ length: 3 }, () =>
+          axios.post(
+            `/generate_thumbnail?script=${encodeURIComponent(story)}"&title=${encodeURIComponent(title)}`,
+          ),
+        );
+        const responses = await Promise.all(requests);
+        const thumbnails = responses.map(
+          (response) => response.data.thumbnail_url,
+        );
+        setThumbnails(thumbnails);
+      } catch (error) {
+        console.error("Error fetching thumbnails:", error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchThumbnails();
+  }, [story, title, setThumbnails]);
 
   return (
     <div className="flex flex-col items-center p-4">
       <h2 className="bg-gradient-to-r from-[#ff00cc] via-[#7130c3] to-[#410093] bg-clip-text pb-6 text-center text-2xl font-bold text-transparent">
         Select a Thumbnail
       </h2>
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-        {thumbnails.map((thumbnail, index) => (
-          <Card
-            key={index}
-            onClick={() => setSelectedThumbnail(thumbnail)}
-            className={cn(
-              "cursor-pointer transition-transform duration-200",
-              selectedThumbnail === thumbnail
-                ? "border-4 border-indigo-500 bg-indigo-800"
-                : "border-4 border-gray-700 bg-[#070710]",
-            )}
-          >
-            <CardContent className="p-0">
-              <img
-                src={thumbnail}
-                alt={`Thumbnail ${index + 1}`}
-                className="w-full max-w-xs rounded"
-              />
-            </CardContent>
-          </Card>
-        ))}
-      </div>
+
+      {loading ? <ThumbnailsSkeleton /> : <Thumbnails />}
+
       <div className="mt-4">
         <Button
           className="flex items-center gap-2 rounded-full bg-red-600 text-white shadow-lg hover:bg-red-700"
           disabled={!selectedThumbnail}
-          onClick={() => {
-            if (selectedThumbnail) {
-              // Handle upload to YouTube
-              console.log("Uploading", selectedThumbnail);
-            }
-          }}
+          type="submit"
         >
           Upload Video to YouTube
           <svg

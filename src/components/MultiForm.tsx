@@ -1,16 +1,27 @@
+import axios from "@/api/axiosInstance";
 import { useMultiFormContext } from "@/context/MultiFormContext";
 import { motion } from "framer-motion";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import MultiFormButtons from "./MutiFormButtons";
+import ReviewStory from "./ReviewStory";
+import ReviewTitle from "./ReviewTitle";
 import StepProgress from "./StepProgress";
-import Story from "./Story";
 import Topics from "./Topics";
 import Upload from "./Upload";
-import Video from "./Video";
 
 export default function MultiForm() {
-  const { currentStep, delta, setLoading } = useMultiFormContext();
+  const {
+    currentStep,
+    delta,
+    setLoading,
+    title,
+    caption,
+    selectedThumbnail,
+    story,
+    selectedLanguage,
+    selectedVoice,
+  } = useMultiFormContext();
 
   useEffect(() => {
     setLoading(true);
@@ -18,8 +29,24 @@ export default function MultiForm() {
 
   const navigation = useNavigate();
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    try {
+      const { data } = await axios.get("/download/videos", {
+        params: {
+          title: title,
+          description: caption,
+          thumbnail_url: selectedThumbnail,
+          story: story,
+          language: selectedLanguage === "English" ? "" : selectedLanguage,
+          voice: selectedVoice,
+        },
+      });
+      console.log("Video data:", data);
+    } catch (error) {
+      console.error("Error fetching video:", error);
+    }
+
     navigation("/");
   }
 
@@ -29,7 +56,7 @@ export default function MultiForm() {
       className="relative flex flex-col justify-start overflow-x-hidden bg-[#070710]"
     >
       <h1 className="flex h-[25vh] flex-col justify-end p-5 text-center text-xl font-bold text-[#ccceef] md:px-24 md:text-5xl">
-        Create Videos from Trends with AI
+        Create ReviewTitles from Trends with AI
       </h1>
 
       <div className="flex min-h-[75vh] flex-col justify-between p-5 md:px-24">
@@ -52,7 +79,7 @@ export default function MultiForm() {
               transition={{ duration: 0.3, ease: "easeInOut" }}
               className="relative"
             >
-              <Story />
+              <ReviewStory />
             </motion.div>
           )}
           {currentStep === 2 && (
@@ -60,8 +87,9 @@ export default function MultiForm() {
               initial={{ x: delta >= 0 ? "50%" : "-50%", opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               transition={{ duration: 0.3, ease: "easeInOut" }}
+              className="relative"
             >
-              <Video />
+              <ReviewTitle />
             </motion.div>
           )}
           {currentStep === 3 && (

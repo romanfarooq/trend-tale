@@ -8,7 +8,7 @@ export default function TrendingTopics() {
 
   return (
     <>
-      <h2 className="bg-gradient-to-r from-[#ff00cc] via-[#7130c3] to-[#410093] bg-clip-text pb-6 text-center text-2xl font-bold text-transparent">
+      <h2 className="bg-gradient-to-r pt-6 from-[#ff00cc] via-[#7130c3] to-[#410093] bg-clip-text pb-6 text-center text-2xl font-bold text-transparent">
         Select Trending Topic
       </h2>
 
