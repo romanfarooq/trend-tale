@@ -1,13 +1,13 @@
 import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
 import {
   Select,
-  SelectTrigger,
   SelectContent,
   SelectItem,
+  SelectTrigger,
 } from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
 import { useMultiFormContext } from "@/context/MultiFormContext";
-import { Label } from "@/components/ui/label";
 
 const voiceOptions = ["alloy", "echo", "fable", "onyx", "nova", "shimmer"];
 const languageOptions = [
@@ -92,7 +92,7 @@ export default function StoryTextarea({
         value={story}
         disabled={!isEditing}
         onChange={(e) => setStory(e.target.value)}
-        className="relative min-h-32 resize-y w-full rounded border border-gray-600 bg-gray-900 p-2 text-gray-300 focus:border-indigo-500 focus:ring-indigo-500"
+        className="relative min-h-32 w-full resize-none overflow-hidden rounded border border-gray-600 bg-gray-900 p-2 text-gray-300 focus:border-indigo-500 focus:ring-indigo-500"
       />
       <div className="mt-4 flex flex-row gap-4">
         <div className="flex w-1/2 flex-col gap-2">

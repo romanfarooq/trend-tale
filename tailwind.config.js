@@ -76,13 +76,35 @@ export default {
           from: { transform: "translateY(0)" },
           to: { transform: "translateY(calc(-100% - var(--gap)))" },
         },
+        enter: {
+          "0%": {
+            opacity: "0",
+            transform: "scale(.9)",
+          },
+          "100%": {
+            opacity: "1",
+            transform: "scale(1)",
+          },
+        },
+        leave: {
+          "0%": {
+            opacity: "1",
+            transform: "scale(1)",
+          },
+          "100%": {
+            opacity: "0",
+            transform: "scale(.9)",
+          },
+        },
       },
-      animation: {
-        "accordion-down": "accordion-down 0.2s ease-out",
-        "accordion-up": "accordion-up 0.2s ease-out",
-        marquee: "marquee var(--duration) linear infinite",
-        "marquee-vertical": "marquee-vertical var(--duration) linear infinite",
-      },
+    },
+    animation: {
+      "accordion-down": "accordion-down 0.2s ease-out",
+      "accordion-up": "accordion-up 0.2s ease-out",
+      marquee: "marquee var(--duration) linear infinite",
+      "marquee-vertical": "marquee-vertical var(--duration) linear infinite",
+      enter: "enter .2s ease-out",
+      leave: "leave .15s ease-in forwards",
     },
   },
   plugins: [require("tailwindcss-animate")],

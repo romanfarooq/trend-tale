@@ -1,23 +1,18 @@
 import axios from "@/api/axiosInstance";
-import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
+import MultiFormButtons from "@/components/MutiFormButtons";
+import ReviewStory from "@/components/ReviewStory";
+import ReviewTitle from "@/components/ReviewTitle";
+import StepProgress from "@/components/StepProgress";
+import Topics from "@/components/Topics";
+import Upload from "@/components/Upload";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useAuth } from "@/context/AuthContext";
 import { useMultiFormContext } from "@/context/MultiFormContext";
-import { useToast } from "@/hooks/use-toast";
+import { cn, getInitials } from "@/lib/utils";
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-import MultiFormButtons from "./MutiFormButtons";
-import ReviewStory from "./ReviewStory";
-import ReviewTitle from "./ReviewTitle";
-import StepProgress from "./StepProgress";
-import Topics from "./Topics";
-import Upload from "./Upload";
 
 export default function MultiForm() {
   const {
@@ -34,16 +29,76 @@ export default function MultiForm() {
 
   const { user, token, login } = useAuth();
   const navigation = useNavigate();
-  const { toast } = useToast();
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   useEffect(() => {
     setLoading(true);
   }, [setLoading]);
 
-  async function uploadVideo(credentials: string, email: string) {
+  function showUploadToast(
+    email: string,
+    picture: string,
+    givenName: string,
+    familyName: string,
+  ) {
+    toast.custom(
+      (t) => (
+        <div
+          className={cn(
+            t.visible ? "animate-enter" : "animate-leave",
+            "pointer-events-auto flex w-full max-w-md rounded-lg bg-slate-900 shadow-lg ring-1 ring-gray-600",
+          )}
+        >
+          <div className="w-0 flex-1 p-4">
+            <div className="flex items-start">
+              <div className="flex-shrink-0 pt-0.5">
+                <Avatar>
+                  <AvatarImage
+                    src={picture}
+                    className="h-10 w-10 rounded-full"
+                    alt="User Avatar"
+                  />
+                  <AvatarFallback>
+                    {getInitials(givenName, familyName)}
+                  </AvatarFallback>
+                </Avatar>
+              </div>
+              <div className="ml-3 flex-1">
+                <p className="text-lg font-medium text-gray-100">
+                  Video Processing
+                </p>
+                <p className="mt-1 text-sm text-gray-400">
+                  Your video is being processed. We will notify you at{" "}
+                  <span className="text-gray-300">{email}</span> once it's
+                  uploaded.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className="flex border-l border-gray-700">
+            <button
+              onClick={() => toast.dismiss(t.id)}
+              className="flex w-full items-center justify-center rounded-none rounded-r-lg border border-transparent p-4 text-sm font-medium text-indigo-400 hover:text-indigo-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      ),
+      {
+        duration: 10000,
+      },
+    );
+  }
+
+  async function uploadVideo(
+    credentials: string,
+    email: string,
+    picture: string,
+    given_name: string,
+    family_name: string,
+  ) {
     try {
-      await axios.get("/download/videos", {
+      axios.get("/download/videos", {
         headers: {
           Authorization: `Bearer ${credentials}`,
         },
@@ -57,20 +112,11 @@ export default function MultiForm() {
           voice: selectedVoice,
         },
       });
-      toast({
-        title: "Video uploaded",
-        description:
-          "You will be notified by email once the video is processed.",
-        variant: "default",
-      });
-      // setIsDialogOpen(true);
+
+      showUploadToast(email, picture, given_name, family_name);
     } catch (error) {
       console.error("Error uploading video:", error);
-      toast({
-        title: "Error",
-        description: "Failed to upload video.",
-        variant: "destructive",
-      });
+      toast.error("There was an error uploading your video.");
     }
   }
 
@@ -78,22 +124,30 @@ export default function MultiForm() {
     e.preventDefault();
 
     if (user && token) {
-      uploadVideo(token, user.email);
+      uploadVideo(
+        token,
+        user.email,
+        user.picture,
+        user.given_name,
+        user.family_name,
+      );
+      navigation("/");
     } else {
       login();
       if (user && token) {
-        uploadVideo(token, user.email);
+        uploadVideo(
+          token,
+          user.email,
+          user.picture,
+          user.given_name,
+          user.family_name,
+        );
+        navigation("/");
       } else {
         console.error("Login failed or token not found");
+        toast.error("Login failed, please try again.");
       }
     }
-
-    navigation("/");
-  }
-
-  function handleCloseDialog() {
-    setIsDialogOpen(false);
-    navigation("/");
   }
 
   return (
@@ -151,17 +205,6 @@ export default function MultiForm() {
 
         <MultiFormButtons />
       </div>
-
-      {/* <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-        <DialogTitle>Upload Successful</DialogTitle>
-        <DialogContent>
-          Your video is being processed. We will notify you at {user?.email}{" "}
-          once it's ready.
-        </DialogContent>
-        <DialogTrigger>
-          <Button onClick={handleCloseDialog}>OK</Button>
-        </DialogTrigger>
-      </Dialog> */}
     </section>
   );
 }

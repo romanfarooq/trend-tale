@@ -1,9 +1,9 @@
+import axios from "@/api/axiosInstance";
+import Thumbnails from "@/components/Thumbnails";
+import ThumbnailsSkeleton from "@/components/ThumbnailsSkeleton";
 import { Button } from "@/components/ui/button";
 import { useMultiFormContext } from "@/context/MultiFormContext";
 import { useEffect } from "react";
-import axios from "@/api/axiosInstance";
-import Thumbnails from "./Thumbnails";
-import ThumbnailsSkeleton from "./ThumbnailsSkeleton";
 
 export default function Upload() {
   const {

@@ -2,17 +2,12 @@ import Icon from "@/assets/icon.png";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/context/AuthContext";
+import { getInitials } from "@/lib/utils";
 import { LogOut } from "lucide-react";
 import { Link } from "react-router-dom";
 
 export default function DesktopNav() {
   const { login, user, logout } = useAuth();
-
-  const getInitials = (givenName: string, familyName: string) => {
-    const firstInitial = givenName.charAt(0).toUpperCase();
-    const lastInitial = familyName.charAt(0).toUpperCase();
-    return `${firstInitial}${lastInitial}`;
-  };
 
   return (
     <div className="hidden h-16 items-center justify-between md:flex">

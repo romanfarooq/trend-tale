@@ -1,5 +1,12 @@
-import { useToast } from "@/hooks/use-toast";
-import { createContext, useContext, useState } from "react";
+import {
+  createContext,
+  Dispatch,
+  ReactNode,
+  SetStateAction,
+  useContext,
+  useState,
+} from "react";
+import { toast } from "react-hot-toast";
 
 type MultiFormContextType = {
   steps: { id: string; name: string }[];
@@ -9,29 +16,29 @@ type MultiFormContextType = {
   nextStep: () => void;
   prevStep: () => void;
   trendingTopics: string[];
-  setTrendingTopics: React.Dispatch<React.SetStateAction<string[]>>;
+  setTrendingTopics: Dispatch<SetStateAction<string[]>>;
   selectedTopic: string;
-  setSelectedTopic: React.Dispatch<React.SetStateAction<string>>;
+  setSelectedTopic: Dispatch<SetStateAction<string>>;
   title: string;
-  setTitle: React.Dispatch<React.SetStateAction<string>>;
+  setTitle: Dispatch<SetStateAction<string>>;
   caption: string;
-  setCaption: React.Dispatch<React.SetStateAction<string>>;
+  setCaption: Dispatch<SetStateAction<string>>;
   videoUrl: string;
-  setVideoUrl: React.Dispatch<React.SetStateAction<string>>;
+  setVideoUrl: Dispatch<SetStateAction<string>>;
   story: string;
-  setStory: React.Dispatch<React.SetStateAction<string>>;
+  setStory: Dispatch<SetStateAction<string>>;
   loading: boolean;
-  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  setLoading: Dispatch<SetStateAction<boolean>>;
   error: string;
-  setError: React.Dispatch<React.SetStateAction<string>>;
-  selectedVoice?: string;
-  setSelectedVoice: React.Dispatch<React.SetStateAction<string>>;
-  selectedLanguage?: string;
-  setSelectedLanguage: React.Dispatch<React.SetStateAction<string>>;
+  setError: Dispatch<SetStateAction<string>>;
+  selectedVoice: string;
+  setSelectedVoice: Dispatch<SetStateAction<string>>;
+  selectedLanguage: string;
+  setSelectedLanguage: Dispatch<SetStateAction<string>>;
   thumbnails: string[];
-  setThumbnails: React.Dispatch<React.SetStateAction<string[]>>;
+  setThumbnails: Dispatch<SetStateAction<string[]>>;
   selectedThumbnail: string;
-  setSelectedThumbnail: React.Dispatch<React.SetStateAction<string>>;
+  setSelectedThumbnail: Dispatch<SetStateAction<string>>;
 };
 
 const MultiFormContext = createContext<MultiFormContextType | null>(null);
@@ -39,7 +46,7 @@ const MultiFormContext = createContext<MultiFormContextType | null>(null);
 export default function MultiFormProvider({
   children,
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
 }) {
   const [currentStep, setCurrentStep] = useState(0);
   const [previousStep, setPreviousStep] = useState(0);
@@ -56,8 +63,6 @@ export default function MultiFormProvider({
   const [thumbnails, setThumbnails] = useState<string[]>([]);
   const [selectedThumbnail, setSelectedThumbnail] = useState("");
 
-  const { toast } = useToast();
-
   const steps = [
     { id: "Step 1", name: "Topic Selection" },
     { id: "Step 2", name: "Review Story" },
@@ -68,11 +73,27 @@ export default function MultiFormProvider({
 
   const nextStep = () => {
     if (currentStep === 0 && selectedTopic.length === 0) {
-      toast({
-        title: "Action Required",
-        description: "Please select a topic before proceeding.",
-        variant: "destructive",
-      });
+      toast.error("Please select a topic to continue");
+      return;
+    }
+
+    if (currentStep === 1 && story.length === 0) {
+      toast.error("Please write a story to continue");
+      return;
+    }
+
+    if (currentStep === 2 && title.length === 0) {
+      toast.error("Please write a title to continue");
+      return;
+    }
+
+    if (currentStep === 2 && caption.length === 0) {
+      toast.error("Please write a description to continue");
+      return;
+    }
+
+    if (currentStep === 3 && selectedThumbnail.length === 0) {
+      toast.error("Please select a thumbnail to continue");
       return;
     }
 

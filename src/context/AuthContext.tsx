@@ -1,4 +1,5 @@
 import axios from "@/api/axiosInstance";
+import { useCookies } from "react-cookie";
 import { googleLogout, useGoogleLogin } from "@react-oauth/google";
 import {
   createContext,
@@ -7,7 +8,6 @@ import {
   useEffect,
   useState,
 } from "react";
-import { useCookies } from "react-cookie";
 
 type AuthContextType = {
   user: User | null;
@@ -96,7 +96,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   );
 };
 
-export const useAuth = (): AuthContextType => {
+export const useAuth = () => {
   const context = useContext(AuthContext);
   if (!context) {
     throw new Error("useAuth must be used within an AuthProvider");

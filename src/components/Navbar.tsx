@@ -1,6 +1,6 @@
+import DesktopNav from "@/components/DesktopNav";
+import MobileNav from "@/components/MobileNav";
 import { Outlet } from "react-router-dom";
-import DesktopNav from "./DesktopNav";
-import MobileNav from "./MobileNav";
 
 export default function Header() {
   return (

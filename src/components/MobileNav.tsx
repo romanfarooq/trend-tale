@@ -1,4 +1,5 @@
 import Icon from "@/assets/icon.png";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -7,10 +8,10 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { useAuth } from "@/context/AuthContext";
+import { getInitials } from "@/lib/utils";
 import { AlignJustify, LogOut } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
 export default function MobileNav() {
   const [isOpen, setIsOpen] = useState(false);
@@ -23,12 +24,6 @@ export default function MobileNav() {
   function handleClose() {
     setIsOpen(false);
   }
-
-  const getInitials = (givenName: string, familyName: string) => {
-    const firstInitial = givenName.charAt(0).toUpperCase();
-    const lastInitial = familyName.charAt(0).toUpperCase();
-    return `${firstInitial}${lastInitial}`;
-  };
 
   return (
     <div className="flex h-16 items-center md:hidden">
