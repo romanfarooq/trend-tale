@@ -1,7 +1,16 @@
 import axios from "@/api/axiosInstance";
+import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { useAuth } from "@/context/AuthContext";
 import { useMultiFormContext } from "@/context/MultiFormContext";
+import { useToast } from "@/hooks/use-toast";
 import { motion } from "framer-motion";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import MultiFormButtons from "./MutiFormButtons";
 import ReviewStory from "./ReviewStory";
@@ -23,30 +32,67 @@ export default function MultiForm() {
     selectedVoice,
   } = useMultiFormContext();
 
+  const { user, token, login } = useAuth();
+  const navigation = useNavigate();
+  const { toast } = useToast();
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+
   useEffect(() => {
     setLoading(true);
   }, [setLoading]);
 
-  const navigation = useNavigate();
-
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
+  async function uploadVideo(credentials: string, email: string) {
     try {
-      const { data } = await axios.get("/download/videos", {
+      await axios.get("/download/videos", {
+        headers: {
+          Authorization: `Bearer ${credentials}`,
+        },
         params: {
+          email: email,
           title: title,
           description: caption,
           thumbnail_url: selectedThumbnail,
           story: story,
-          language: selectedLanguage === "English" ? "" : selectedLanguage,
+          language: selectedLanguage,
           voice: selectedVoice,
         },
       });
-      console.log("Video data:", data);
+      toast({
+        title: "Video uploaded",
+        description:
+          "You will be notified by email once the video is processed.",
+        variant: "default",
+      });
+      // setIsDialogOpen(true);
     } catch (error) {
-      console.error("Error fetching video:", error);
+      console.error("Error uploading video:", error);
+      toast({
+        title: "Error",
+        description: "Failed to upload video.",
+        variant: "destructive",
+      });
+    }
+  }
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+
+    if (user && token) {
+      uploadVideo(token, user.email);
+    } else {
+      login();
+      if (user && token) {
+        uploadVideo(token, user.email);
+      } else {
+        console.error("Login failed or token not found");
+      }
     }
 
+    navigation("/");
+  }
+
+  function handleCloseDialog() {
+    setIsDialogOpen(false);
     navigation("/");
   }
 
@@ -56,7 +102,7 @@ export default function MultiForm() {
       className="relative flex flex-col justify-start overflow-x-hidden bg-[#070710]"
     >
       <h1 className="flex h-[25vh] flex-col justify-end p-5 text-center text-xl font-bold text-[#ccceef] md:px-24 md:text-5xl">
-        Create ReviewTitles from Trends with AI
+        Create Review Titles from Trends with AI
       </h1>
 
       <div className="flex min-h-[75vh] flex-col justify-between p-5 md:px-24">
@@ -105,6 +151,17 @@ export default function MultiForm() {
 
         <MultiFormButtons />
       </div>
+
+      {/* <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+        <DialogTitle>Upload Successful</DialogTitle>
+        <DialogContent>
+          Your video is being processed. We will notify you at {user?.email}{" "}
+          once it's ready.
+        </DialogContent>
+        <DialogTrigger>
+          <Button onClick={handleCloseDialog}>OK</Button>
+        </DialogTrigger>
+      </Dialog> */}
     </section>
   );
 }

@@ -25,9 +25,9 @@ type MultiFormContextType = {
   error: string;
   setError: React.Dispatch<React.SetStateAction<string>>;
   selectedVoice?: string;
-  setSelectedVoice: React.Dispatch<React.SetStateAction<string | undefined>>;
+  setSelectedVoice: React.Dispatch<React.SetStateAction<string>>;
   selectedLanguage?: string;
-  setSelectedLanguage: React.Dispatch<React.SetStateAction<string | undefined>>;
+  setSelectedLanguage: React.Dispatch<React.SetStateAction<string>>;
   thumbnails: string[];
   setThumbnails: React.Dispatch<React.SetStateAction<string[]>>;
   selectedThumbnail: string;
@@ -51,12 +51,8 @@ export default function MultiFormProvider({
   const [story, setStory] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [selectedVoice, setSelectedVoice] = useState<string | undefined>(
-    undefined,
-  );
-  const [selectedLanguage, setSelectedLanguage] = useState<string | undefined>(
-    undefined,
-  );
+  const [selectedVoice, setSelectedVoice] = useState("");
+  const [selectedLanguage, setSelectedLanguage] = useState("");
   const [thumbnails, setThumbnails] = useState<string[]>([]);
   const [selectedThumbnail, setSelectedThumbnail] = useState("");
 
