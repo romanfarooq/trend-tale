@@ -14,6 +14,7 @@ export default function ReviewStory() {
   useEffect(() => {
     async function fetchStory() {
       try {
+        setLoading(true);
         const { data } = await axios.get("/generate/story", {
           params: {
             prompt: selectedTopic,

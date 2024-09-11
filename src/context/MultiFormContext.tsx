@@ -97,8 +97,6 @@ export default function MultiFormProvider({
       return;
     }
 
-    setLoading(true);
-
     if (currentStep < steps.length - 1) {
       setPreviousStep(currentStep);
       setCurrentStep((prev) => prev + 1);

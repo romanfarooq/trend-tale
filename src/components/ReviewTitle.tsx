@@ -14,6 +14,7 @@ export default function Video() {
   useEffect(() => {
     async function fetchTitle() {
       try {
+        setLoading(true);
         const { data } = await axios.get("/title", {
           params: {
             text: story,

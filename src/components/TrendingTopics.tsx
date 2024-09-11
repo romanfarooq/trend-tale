@@ -8,7 +8,7 @@ export default function TrendingTopics() {
 
   return (
     <>
-      <h2 className="bg-gradient-to-r pt-6 from-[#ff00cc] via-[#7130c3] to-[#410093] bg-clip-text pb-6 text-center text-2xl font-bold text-transparent">
+      <h2 className="bg-gradient-to-r from-[#ff00cc] via-[#7130c3] to-[#410093] bg-clip-text pb-6 pt-6 text-center text-2xl font-bold text-transparent">
         Select Trending Topic
       </h2>
 
@@ -24,10 +24,10 @@ export default function TrendingTopics() {
                 : "border-gray-700 bg-gray-900",
             )}
           >
-            <CardContent className="p-4">
+            <CardContent className="flex h-full items-center justify-center p-4">
               <h3
                 className={cn(
-                  "flex items-center text-center justify-center text-lg font-semibold",
+                  "text-center text-lg font-semibold",
                   selectedTopic === topic ? "text-indigo-200" : "text-gray-300",
                 )}
               >

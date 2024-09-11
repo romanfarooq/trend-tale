@@ -10,6 +10,7 @@ export default function Topics() {
   useEffect(() => {
     async function fetchTrendingTopics() {
       try {
+        setLoading(true);
         const { data } = await axios.get("/trending-searches");
         setTrendingTopics(data.top_trending_searches);
       } catch (error) {

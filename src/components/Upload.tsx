@@ -8,35 +8,39 @@ import { useEffect } from "react";
 export default function Upload() {
   const {
     selectedThumbnail,
+    thumbnails,
     setThumbnails,
     story,
     title,
-    loading,
     setLoading,
   } = useMultiFormContext();
 
   useEffect(() => {
     async function fetchThumbnails() {
-      try {
-        const requests = Array.from({ length: 3 }, () =>
-          axios.post(
-            `/generate_thumbnail?script=${encodeURIComponent(story)}"&title=${encodeURIComponent(title)}`,
-          ),
-        );
-        const responses = await Promise.all(requests);
-        const thumbnails = responses.map(
-          (response) => response.data.thumbnail_url,
-        );
-        setThumbnails(thumbnails);
-      } catch (error) {
-        console.error("Error fetching thumbnails:", error);
-      } finally {
-        setLoading(false);
-      }
+      setLoading(true);
+
+      const requests = Array.from({ length: 3 }, () =>
+        axios.post(
+          `/generate_thumbnail?script=${encodeURIComponent(story)}&title=${encodeURIComponent(title)}`,
+        ),
+      );
+
+      requests.forEach(async (request, index) => {
+        try {
+          const response = await request;
+          setThumbnails((prev) => [...prev, response.data.thumbnail_url]);
+        } catch (error) {
+          console.error(`Error fetching thumbnail ${index + 1}:`, error);
+        }
+      });
+
+      setLoading(false);
     }
 
     fetchThumbnails();
-  }, [story, title, setThumbnails]);
+  }, [story, title, setThumbnails, setLoading]);
+
+  const thumbnailsSkeletonLength = 3 - thumbnails.length;
 
   return (
     <div className="flex flex-col items-center p-4">
@@ -44,7 +48,10 @@ export default function Upload() {
         Select a Thumbnail
       </h2>
 
-      {loading ? <ThumbnailsSkeleton /> : <Thumbnails />}
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+        <Thumbnails />
+        <ThumbnailsSkeleton length={thumbnailsSkeletonLength} />
+      </div>
 
       <div className="mt-4">
         <Button

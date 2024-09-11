@@ -6,7 +6,7 @@ export default function Thumbnails() {
   const { thumbnails, selectedThumbnail, setSelectedThumbnail } =
     useMultiFormContext();
   return (
-    <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+    <>
       {thumbnails.map((thumbnail, index) => (
         <Card
           key={index}
@@ -27,6 +27,6 @@ export default function Thumbnails() {
           </CardContent>
         </Card>
       ))}
-    </div>
+    </>
   );
 }

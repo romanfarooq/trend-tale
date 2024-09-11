@@ -89,7 +89,6 @@ export default function MultiForm() {
       },
     );
   }
-
   
   function uploadVideo(
     credentials: string,
@@ -121,7 +120,7 @@ export default function MultiForm() {
     }
   }
 
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
     if (user && token) {

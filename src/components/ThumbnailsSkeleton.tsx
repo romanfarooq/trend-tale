@@ -1,10 +1,10 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 
-export default function ThumbnailsSkeleton() {
+export default function ThumbnailsSkeleton({ length }: { length: number }) {
   return (
-    <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-      {[...Array(3)].map((_, index) => (
+    <>
+      {[...Array(length)].map((_, index) => (
         <Card
           key={index}
           className="cursor-pointer border-4 border-gray-700 bg-[#070710] transition-transform duration-200"
@@ -14,6 +14,6 @@ export default function ThumbnailsSkeleton() {
           </CardContent>
         </Card>
       ))}
-    </div>
+    </>
   );
 }
