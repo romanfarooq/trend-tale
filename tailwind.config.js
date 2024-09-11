@@ -96,6 +96,11 @@ export default {
             transform: "scale(.9)",
           },
         },
+        spin: {
+          to: {
+            transform: "rotate(360deg)",
+          },
+        },
       },
     },
     animation: {
@@ -105,6 +110,7 @@ export default {
       "marquee-vertical": "marquee-vertical var(--duration) linear infinite",
       enter: "enter .2s ease-out",
       leave: "leave .15s ease-in forwards",
+      spin: "spin 1s linear infinite",
     },
   },
   plugins: [require("tailwindcss-animate")],

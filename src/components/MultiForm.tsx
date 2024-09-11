@@ -90,7 +90,8 @@ export default function MultiForm() {
     );
   }
 
-  async function uploadVideo(
+  
+  function uploadVideo(
     credentials: string,
     email: string,
     picture: string,
@@ -134,19 +135,6 @@ export default function MultiForm() {
       navigation("/");
     } else {
       login();
-      if (user && token) {
-        uploadVideo(
-          token,
-          user.email,
-          user.picture,
-          user.given_name,
-          user.family_name,
-        );
-        navigation("/");
-      } else {
-        console.error("Login failed or token not found");
-        toast.error("Login failed, please try again.");
-      }
     }
   }
 

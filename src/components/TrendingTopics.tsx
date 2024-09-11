@@ -27,7 +27,7 @@ export default function TrendingTopics() {
             <CardContent className="p-4">
               <h3
                 className={cn(
-                  "flex items-center justify-center text-lg font-semibold",
+                  "flex items-center text-center justify-center text-lg font-semibold",
                   selectedTopic === topic ? "text-indigo-200" : "text-gray-300",
                 )}
               >

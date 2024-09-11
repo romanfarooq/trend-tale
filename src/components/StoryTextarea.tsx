@@ -92,7 +92,7 @@ export default function StoryTextarea({
         value={story}
         disabled={!isEditing}
         onChange={(e) => setStory(e.target.value)}
-        className="relative min-h-32 w-full resize-none overflow-hidden rounded border border-gray-600 bg-gray-900 p-2 text-gray-300 focus:border-indigo-500 focus:ring-indigo-500"
+        className="relative min-h-32 w-full resize-y rounded border border-gray-600 bg-gray-900 p-2 text-gray-300 focus:border-indigo-500 focus:ring-indigo-500"
       />
       <div className="mt-4 flex flex-row gap-4">
         <div className="flex w-1/2 flex-col gap-2">

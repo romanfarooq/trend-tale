@@ -41,7 +41,7 @@ export default function TitleDescriptionForm({
         <Textarea
           id="description"
           placeholder="Enter the description"
-          className="resize-none overflow-hidden rounded border border-gray-600 bg-gray-900 p-2 text-gray-300 focus:border-indigo-500 focus:ring-indigo-500"
+          className="w-full resize-y rounded border border-gray-600 bg-gray-900 p-2 text-gray-300 focus:border-indigo-500 focus:ring-indigo-500"
           disabled={!isEditing}
           value={caption}
           onChange={(e) => setCaption(e.target.value)}
