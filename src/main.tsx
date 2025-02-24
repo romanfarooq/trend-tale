@@ -1,15 +1,15 @@
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import { CookiesProvider } from "react-cookie";
 import { AuthProvider } from "@/context/AuthContext";
 import { GoogleOAuthProvider } from "@react-oauth/google";
-import { StrictMode } from "react";
-import { CookiesProvider } from "react-cookie";
-import { createRoot } from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
 
 const GoogleClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
 
 createRoot(document.getElementById("root")!).render(
-  // <StrictMode>
+  <StrictMode>
     <GoogleOAuthProvider clientId={GoogleClientId}>
       <CookiesProvider>
         <AuthProvider>
@@ -17,5 +17,5 @@ createRoot(document.getElementById("root")!).render(
         </AuthProvider>
       </CookiesProvider>
     </GoogleOAuthProvider>
-  // </StrictMode>,
+  </StrictMode>,
 );
