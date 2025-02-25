@@ -1,12 +1,12 @@
+import { toast } from "react-hot-toast";
 import {
+  useState,
+  useContext,
   createContext,
   Dispatch,
   ReactNode,
   SetStateAction,
-  useContext,
-  useState,
 } from "react";
-import { toast } from "react-hot-toast";
 
 type MultiFormContextType = {
   steps: { id: string; name: string }[];

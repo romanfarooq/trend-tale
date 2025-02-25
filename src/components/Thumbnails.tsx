@@ -1,6 +1,6 @@
+import { cn } from "@/lib/utils";
 import { Card, CardContent } from "@/components/ui/card";
 import { useMultiFormContext } from "@/context/MultiFormContext";
-import { cn } from "@/lib/utils";
 
 export default function Thumbnails() {
   const { thumbnails, selectedThumbnail, setSelectedThumbnail } =

@@ -1,17 +1,17 @@
 import Icon from "@/assets/icon.png";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { getInitials } from "@/lib/utils";
+import { useAuth } from "@/context/AuthContext";
+import { AlignJustify, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   Sheet,
   SheetContent,
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { useAuth } from "@/context/AuthContext";
-import { getInitials } from "@/lib/utils";
-import { AlignJustify, LogOut } from "lucide-react";
-import { useState } from "react";
-import { Link } from "react-router-dom";
 
 export default function MobileNav() {
   const [isOpen, setIsOpen] = useState(false);

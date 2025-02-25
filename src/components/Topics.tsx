@@ -1,8 +1,8 @@
 import axios from "@/api/axiosInstance";
 import TrendingTopics from "@/components/TrendingTopics";
 import TrendingTopicsSkeleton from "@/components/TrendingTopicsSkeleton";
-import { useMultiFormContext } from "@/context/MultiFormContext";
 import { useEffect } from "react";
+import { useMultiFormContext } from "@/context/MultiFormContext";
 
 export default function Topics() {
   const { setTrendingTopics, loading, setLoading } = useMultiFormContext();

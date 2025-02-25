@@ -1,18 +1,18 @@
 import axios from "@/api/axiosInstance";
-import MultiFormButtons from "@/components/MutiFormButtons";
+import Upload from "@/components/Upload";
+import Topics from "@/components/Topics";
 import ReviewStory from "@/components/ReviewStory";
 import ReviewTitle from "@/components/ReviewTitle";
 import StepProgress from "@/components/StepProgress";
-import Topics from "@/components/Topics";
-import Upload from "@/components/Upload";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { useAuth } from "@/context/AuthContext";
-import { useMultiFormContext } from "@/context/MultiFormContext";
-import { cn, getInitials } from "@/lib/utils";
-import { motion } from "framer-motion";
+import MultiFormButtons from "@/components/MutiFormButtons";
 import { useEffect } from "react";
+import { motion } from "framer-motion";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "@/context/AuthContext";
+import { cn, getInitials } from "@/lib/utils";
+import { useMultiFormContext } from "@/context/MultiFormContext";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 export default function MultiForm() {
   const {
@@ -89,7 +89,7 @@ export default function MultiForm() {
       },
     );
   }
-  
+
   function uploadVideo(
     credentials: string,
     email: string,
