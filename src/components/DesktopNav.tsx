@@ -1,4 +1,5 @@
 import Icon from "@/assets/icon.png";
+import GoogleIcon from "@/assets/google-icon.png";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/context/AuthContext";
@@ -65,7 +66,7 @@ export default function DesktopNav() {
           onClick={login}
         >
           Sign in with Google
-          <img src="/src/assets/google-icon.png" alt="" className="h-5 w-5" />
+          <img src={GoogleIcon} alt="Google icon" className="h-5 w-5" />
         </Button>
       )}
     </div>

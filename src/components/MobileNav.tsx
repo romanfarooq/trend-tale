@@ -1,4 +1,5 @@
 import Icon from "@/assets/icon.png";
+import GoogleIcon from "@/assets/google-icon.png";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { getInitials } from "@/lib/utils";
@@ -107,7 +108,7 @@ export default function MobileNav() {
               >
                 Sign in with Google
                 <img
-                  src="/src/assets/google-icon.png"
+                  src={GoogleIcon}
                   alt="Google icon"
                   className="h-5 w-5"
                 />

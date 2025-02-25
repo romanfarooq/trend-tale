@@ -1,29 +1,33 @@
 import Card from "@/components/Card";
+import StoryEdit from "@/assets/story-edit.png";
+import YoutubeUpload from "@/assets/youtube-upload.png";
+import VideoGeneration from "@/assets/video-generation.png";
+import StoryGeneration from "@/assets/story-generation.png";
 
 const CardData = [
   {
     title: "Trend to Video in Minutes",
     description:
       "Select a trending topic and watch as TrendTale transforms it into a captivating video story.",
-    imgPath: "/src/assets/video-generation.png",
+    imgPath: VideoGeneration,
   },
   {
     title: "AI-Generated Stories",
     description:
       "Our AI generates stories that are engaging, informative, and tailored to the selected topic.",
-    imgPath: "/src/assets/story-generation.png",
+    imgPath: StoryGeneration,
   },
   {
     title: "Automatic Video Upload",
     description:
       "Once the video is created, TrendTale automatically uploads it to your YouTube channel.",
-    imgPath: "/src/assets/youtube-upload.png",
+    imgPath: YoutubeUpload,
   },
   {
     title: "Customizable Stories",
     description:
       "Edit the stories created by AI to add a personal touch or make them more relevant to your audience.",
-    imgPath: "/src/assets/story-edit.png",
+    imgPath: StoryEdit,
   },
 ];
 
