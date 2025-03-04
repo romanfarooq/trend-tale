@@ -3,23 +3,37 @@ import MultiForm from "@/components/MultiForm";
 import NavBar from "@/components/Navbar";
 import MultiFormProvider from "@/context/MultiFormContext";
 import { Toaster } from "react-hot-toast";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <NavBar />,
+    children: [
+      {
+        index: true,
+        element: <Home />,
+      },
+      {
+        path: "/generate",
+        element: (
+          <MultiFormProvider>
+            <MultiForm />
+          </MultiFormProvider>
+        ),
+      },
+      {
+        path: "*",
+        element: <Home />,
+      },
+    ],
+  },
+]);
 
 export default function App() {
   return (
-    <BrowserRouter>
-      <NavBar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route
-          path="/generate"
-          element={
-            <MultiFormProvider>
-              <MultiForm />
-            </MultiFormProvider>
-          }
-        />
-      </Routes>
+    <>
+      <RouterProvider router={router} />
       <Toaster
         toastOptions={{
           duration: 2000,
@@ -30,6 +44,6 @@ export default function App() {
         }}
         position="top-center"
       />
-    </BrowserRouter>
+    </>
   );
 }
