@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { getInitials } from "@/lib/utils";
 import { useAuth } from "@/context/AuthContext";
+import { NavigationHandler } from "@/types/types";
 import { AlignJustify, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -14,17 +15,14 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 
-export default function MobileNav() {
+export default function MobileNav({ handleNavigation }: NavigationHandler) {
   const [isOpen, setIsOpen] = useState(false);
   const { login, logout, user } = useAuth();
 
-  function handleOpen() {
-    setIsOpen(true);
-  }
-
-  function handleClose() {
+  const handleClose: NavigationHandler["handleNavigation"] = (e, to) => {
     setIsOpen(false);
-  }
+    handleNavigation(e, to);
+  };
 
   return (
     <div className="flex h-16 items-center md:hidden">
@@ -45,11 +43,11 @@ export default function MobileNav() {
         <SheetTrigger asChild>
           <AlignJustify
             className="mr-4 cursor-pointer md:hidden"
-            onClick={handleOpen}
+            onClick={() => setIsOpen(true)}
           />
         </SheetTrigger>
         <SheetContent
-          className="flex w-full flex-col justify-between border-none bg-black text-white"
+          className="flex w-full flex-col justify-between border-none bg-black p-5 pt-10 text-white"
           side="right"
         >
           <div className="flex items-center gap-2">
@@ -60,31 +58,28 @@ export default function MobileNav() {
           </div>
 
           <nav className="mt-6 flex flex-col gap-y-10 text-center">
-            <Link
-              to="/#home"
+            <a
               className="border-transparent text-2xl font-semibold text-white transition-colors duration-150 ease-in-out hover:bg-transparent hover:text-[#dd00ac] focus:bg-transparent focus:text-[#dd00ac] active:bg-transparent active:text-[#dd00ac]"
-              onClick={handleClose}
+              onClick={(e) => handleClose(e, "/#home")}
             >
               Home
-            </Link>
-            <Link
-              to="/#about"
+            </a>
+            <a
               className="border-transparent text-2xl font-semibold text-white transition-colors duration-150 ease-in-out hover:bg-transparent hover:text-[#dd00ac] focus:bg-transparent focus:text-[#dd00ac] active:bg-transparent active:text-[#dd00ac]"
-              onClick={handleClose}
+              onClick={(e) => handleClose(e, "/#about")}
             >
               About
-            </Link>
-            <Link
-              to="/#faqs"
+            </a>
+            <a
               className="border-transparent text-2xl font-semibold text-white transition-colors duration-150 ease-in-out hover:bg-transparent hover:text-[#dd00ac] focus:bg-transparent focus:text-[#dd00ac] active:bg-transparent active:text-[#dd00ac]"
-              onClick={handleClose}
+              onClick={(e) => handleClose(e, "/#faqs")}
             >
               FAQs
-            </Link>
+            </a>
             <Link
               to="/generate"
               className="border-transparent text-2xl font-semibold text-white transition-colors duration-150 ease-in-out hover:bg-transparent hover:text-[#dd00ac] focus:bg-transparent focus:text-[#dd00ac] active:bg-transparent active:text-[#dd00ac]"
-              onClick={handleClose}
+              onClick={() => setIsOpen(false)}
             >
               Generate Video
             </Link>
@@ -94,7 +89,7 @@ export default function MobileNav() {
             {user ? (
               <Button
                 variant="default"
-                className="flex items-center gap-2 rounded-xl border-none bg-linear-to-r from-[#dd00ac] via-[#7130c3] to-[#410093] text-xl text-white"
+                className="bg-linear-to-r flex items-center gap-2 rounded-xl border-none from-[#dd00ac] via-[#7130c3] to-[#410093] text-xl text-white"
                 onClick={logout}
               >
                 <LogOut className="h-5 w-5" />
@@ -103,15 +98,11 @@ export default function MobileNav() {
             ) : (
               <Button
                 variant="default"
-                className="flex items-center gap-2 rounded-xl border-none bg-linear-to-r from-[#dd00ac] via-[#7130c3] to-[#410093] text-xl text-white"
+                className="bg-linear-to-r flex items-center gap-2 rounded-xl border-none from-[#dd00ac] via-[#7130c3] to-[#410093] text-xl text-white"
                 onClick={login}
               >
                 Sign in with Google
-                <img
-                  src={GoogleIcon}
-                  alt="Google icon"
-                  className="h-5 w-5"
-                />
+                <img src={GoogleIcon} alt="Google icon" className="h-5 w-5" />
               </Button>
             )}
           </div>

@@ -4,10 +4,6 @@
 
 @custom-variant dark (&:is(.dark *));
 
-html {
-  scroll-behavior: smooth;
-}
-
 @theme {
   --animate-*: initial;
   --animate-accordion-down: accordion-down 0.2s ease-out;

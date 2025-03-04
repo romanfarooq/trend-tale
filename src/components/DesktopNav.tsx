@@ -1,13 +1,14 @@
 import Icon from "/images/icon.png";
 import GoogleIcon from "/images/google-icon.png";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Link } from "react-router-dom";
+import { LogOut } from "lucide-react";
+import { getInitials } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/context/AuthContext";
-import { getInitials } from "@/lib/utils";
-import { LogOut } from "lucide-react";
-import { Link } from "react-router-dom";
+import { NavigationHandler } from "@/types/types";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
-export default function DesktopNav() {
+export default function DesktopNav({ handleNavigation }: NavigationHandler) {
   const { login, user, logout } = useAuth();
 
   return (
@@ -17,24 +18,24 @@ export default function DesktopNav() {
         <h1 className="text-3xl font-bold">TrendTale</h1>
       </div>
       <nav className="flex flex-1 items-center justify-evenly lg:text-lg">
-        <Link
-          to="/#home"
-          className="border-transparent text-white transition-colors duration-150 ease-in-out hover:bg-transparent hover:text-[#dd00ac] focus:bg-transparent focus:text-[#dd00ac] active:bg-transparent active:text-[#dd00ac]"
+        <a
+          onClick={(e) => handleNavigation(e, "/#home")}
+          className="cursor-pointer border-transparent text-white transition-colors duration-150 ease-in-out hover:bg-transparent hover:text-[#dd00ac] focus:bg-transparent focus:text-[#dd00ac] active:bg-transparent active:text-[#dd00ac]"
         >
           Home
-        </Link>
-        <Link
-          to="/#about"
-          className="border-transparent text-white transition-colors duration-150 ease-in-out hover:bg-transparent hover:text-[#dd00ac] focus:bg-transparent focus:text-[#dd00ac] active:bg-transparent active:text-[#dd00ac]"
+        </a>
+        <a
+          onClick={(e) => handleNavigation(e, "/#about")}
+          className="cursor-pointer border-transparent text-white transition-colors duration-150 ease-in-out hover:bg-transparent hover:text-[#dd00ac] focus:bg-transparent focus:text-[#dd00ac] active:bg-transparent active:text-[#dd00ac]"
         >
           About
-        </Link>
-        <Link
-          to="/#faqs"
-          className="border-transparent text-white transition-colors duration-150 ease-in-out hover:bg-transparent hover:text-[#dd00ac] focus:bg-transparent focus:text-[#dd00ac] active:bg-transparent active:text-[#dd00ac]"
+        </a>
+        <a
+          onClick={(e) => handleNavigation(e, "/#faqs")}
+          className="cursor-pointer border-transparent text-white transition-colors duration-150 ease-in-out hover:bg-transparent hover:text-[#dd00ac] focus:bg-transparent focus:text-[#dd00ac] active:bg-transparent active:text-[#dd00ac]"
         >
           FAQs
-        </Link>
+        </a>
         <Link
           to="/generate"
           className="border-transparent text-white transition-colors duration-150 ease-in-out hover:bg-transparent hover:text-[#dd00ac] focus:bg-transparent focus:text-[#dd00ac] active:bg-transparent active:text-[#dd00ac]"
@@ -46,7 +47,7 @@ export default function DesktopNav() {
         <div className="flex items-center gap-4">
           <Button
             variant="default"
-            className="flex items-center gap-2 rounded-xl border-none bg-linear-to-r from-[#dd00ac] via-[#7130c3] to-[#410093]"
+            className="bg-linear-to-r flex items-center gap-2 rounded-xl border-none from-[#dd00ac] via-[#7130c3] to-[#410093]"
             onClick={logout}
           >
             <LogOut className="h-5 w-5" />
@@ -62,7 +63,7 @@ export default function DesktopNav() {
       ) : (
         <Button
           variant="default"
-          className="mr-10 flex items-center gap-2 rounded-xl border-none bg-linear-to-r from-[#dd00ac] via-[#7130c3] to-[#410093]"
+          className="bg-linear-to-r mr-10 flex items-center gap-2 rounded-xl border-none from-[#dd00ac] via-[#7130c3] to-[#410093]"
           onClick={login}
         >
           Sign in with Google
