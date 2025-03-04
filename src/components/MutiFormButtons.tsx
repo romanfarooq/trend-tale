@@ -11,7 +11,7 @@ export default function MultiFormButtons() {
         type="button"
         onClick={prevStep}
         disabled={currentStep === 0}
-        className="rounded bg-[#070710] px-2 py-1 text-sm font-semibold text-indigo-500 shadow-sm ring-1 ring-inset ring-indigo-300 hover:bg-indigo-800 disabled:cursor-not-allowed disabled:opacity-50"
+        className="rounded bg-[#070710] px-2 py-1 text-sm font-semibold text-indigo-500 shadow-xs ring-1 ring-inset ring-indigo-300 hover:bg-indigo-800 disabled:cursor-not-allowed disabled:opacity-50"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -32,7 +32,7 @@ export default function MultiFormButtons() {
         type="button"
         onClick={nextStep}
         disabled={currentStep === steps.length - 1 || loading}
-        className="rounded bg-[#070710] px-2 py-1 text-sm font-semibold text-indigo-500 shadow-sm ring-1 ring-inset ring-indigo-300 hover:bg-indigo-800 disabled:cursor-not-allowed disabled:opacity-50"
+        className="rounded bg-[#070710] px-2 py-1 text-sm font-semibold text-indigo-500 shadow-xs ring-1 ring-inset ring-indigo-300 hover:bg-indigo-800 disabled:cursor-not-allowed disabled:opacity-50"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"

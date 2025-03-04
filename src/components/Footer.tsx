@@ -1,5 +1,5 @@
-import AppStoreImage from "@/assets/appstore.png";
-import GooglePlayImage from "@/assets/googleplay.png";
+import AppStoreImage from "/images/appstore.png";
+import GooglePlayImage from "/images/googleplay.png";
 import { Link } from "react-router-dom";
 
 export default function Footer() {
@@ -9,7 +9,7 @@ export default function Footer() {
         <div className="flex-1">
           <h1 className="mb-6 text-2xl font-bold sm:text-3xl md:text-lg lg:text-3xl xl:text-4xl">
             Transform Trending Topics
-            <span className="bg-gradient-to-r from-purple-500 via-pink-500 to-indigo-500 bg-clip-text text-transparent">
+            <span className="bg-linear-to-r from-purple-500 via-pink-500 to-indigo-500 bg-clip-text text-transparent">
               <br />
               into Captivating Videos.
             </span>

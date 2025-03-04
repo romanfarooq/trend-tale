@@ -2,7 +2,6 @@ import Home from "@/components/Home";
 import MultiForm from "@/components/MultiForm";
 import NavBar from "@/components/Navbar";
 import MultiFormProvider from "@/context/MultiFormContext";
-import ScrollToHashElement from "@cascadia-code/scroll-to-hash-element";
 import { Toaster } from "react-hot-toast";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
@@ -31,7 +30,6 @@ export default function App() {
         }}
         position="top-center"
       />
-      <ScrollToHashElement />
     </BrowserRouter>
   );
 }

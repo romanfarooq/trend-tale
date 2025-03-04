@@ -32,18 +32,18 @@ const FunctionalityCard = ({ functionality }: { functionality: string }) => {
 export default function MarqueeItem() {
   return (
     <div className="relative flex w-full flex-col items-center justify-center overflow-hidden bg-[#070710] py-10 md:shadow-xl">
-      <Marquee pauseOnHover className="[--duration:20s]">
+      <Marquee pauseOnHover>
         {firstRow.map((func, index) => (
           <FunctionalityCard key={index} functionality={func} />
         ))}
       </Marquee>
-      <Marquee reverse pauseOnHover className="[--duration:20s]">
+      <Marquee reverse pauseOnHover>
         {secondRow.map((func, index) => (
           <FunctionalityCard key={index} functionality={func} />
         ))}
       </Marquee>
-      <div className="pointer-events-none absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-[#070710]"></div>
-      <div className="pointer-events-none absolute inset-y-0 right-0 w-1/3 bg-gradient-to-l from-[#070710]"></div>
+      <div className="pointer-events-none absolute inset-y-0 left-0 w-1/3 bg-linear-to-r from-[#070710]"></div>
+      <div className="pointer-events-none absolute inset-y-0 right-0 w-1/3 bg-linear-to-l from-[#070710]"></div>
     </div>
   );
 }

@@ -1,5 +1,5 @@
-import Icon from "@/assets/icon.png";
-import GoogleIcon from "@/assets/google-icon.png";
+import Icon from "/images/icon.png";
+import GoogleIcon from "/images/google-icon.png";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { getInitials } from "@/lib/utils";
@@ -94,7 +94,7 @@ export default function MobileNav() {
             {user ? (
               <Button
                 variant="default"
-                className="flex items-center gap-2 rounded-xl border-none bg-gradient-to-r from-[#dd00ac] via-[#7130c3] to-[#410093] text-xl text-white"
+                className="flex items-center gap-2 rounded-xl border-none bg-linear-to-r from-[#dd00ac] via-[#7130c3] to-[#410093] text-xl text-white"
                 onClick={logout}
               >
                 <LogOut className="h-5 w-5" />
@@ -103,7 +103,7 @@ export default function MobileNav() {
             ) : (
               <Button
                 variant="default"
-                className="flex items-center gap-2 rounded-xl border-none bg-gradient-to-r from-[#dd00ac] via-[#7130c3] to-[#410093] text-xl text-white"
+                className="flex items-center gap-2 rounded-xl border-none bg-linear-to-r from-[#dd00ac] via-[#7130c3] to-[#410093] text-xl text-white"
                 onClick={login}
               >
                 Sign in with Google

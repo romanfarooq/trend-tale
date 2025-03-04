@@ -50,7 +50,7 @@ export default function MultiForm() {
         >
           <div className="w-0 flex-1 p-4">
             <div className="flex items-start">
-              <div className="flex-shrink-0 pt-0.5">
+              <div className="shrink-0 pt-0.5">
                 <Avatar>
                   <AvatarImage
                     src={picture}
@@ -77,7 +77,7 @@ export default function MultiForm() {
           <div className="flex border-l border-gray-700">
             <button
               onClick={() => toast.dismiss(t.id)}
-              className="flex w-full items-center justify-center rounded-none rounded-r-lg border border-transparent p-4 text-sm font-medium text-indigo-400 hover:text-indigo-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="flex w-full items-center justify-center rounded-none rounded-r-lg border border-transparent p-4 text-sm font-medium text-indigo-400 hover:text-indigo-300 focus:outline-hidden focus:ring-2 focus:ring-indigo-500"
             >
               Close
             </button>

@@ -33,7 +33,7 @@ export default function ReviewStory() {
 
   return (
     <>
-      <h2 className="bg-gradient-to-r from-[#ff00cc] via-[#7130c3] to-[#410093] bg-clip-text pt-5 text-2xl font-bold text-transparent">
+      <h2 className="bg-linear-to-r from-[#ff00cc] via-[#7130c3] to-[#410093] bg-clip-text pt-5 text-2xl font-bold text-transparent">
         Review Story
       </h2>
       {!isEditing && (

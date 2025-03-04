@@ -1,7 +1,7 @@
 export default function TrendingTopicsSkeleton() {
   return (
     <div className="flex-1">
-      <h2 className="bg-gradient-to-r from-[#ff00cc] via-[#7130c3] to-[#410093] bg-clip-text pb-6 text-center text-2xl font-bold text-transparent">
+      <h2 className="bg-linear-to-r from-[#ff00cc] via-[#7130c3] to-[#410093] bg-clip-text pb-6 text-center text-2xl font-bold text-transparent">
         Loading Topics...
       </h2>
 

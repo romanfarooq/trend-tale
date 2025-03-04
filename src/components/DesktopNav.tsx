@@ -1,5 +1,5 @@
-import Icon from "@/assets/icon.png";
-import GoogleIcon from "@/assets/google-icon.png";
+import Icon from "/images/icon.png";
+import GoogleIcon from "/images/google-icon.png";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/context/AuthContext";
@@ -46,7 +46,7 @@ export default function DesktopNav() {
         <div className="flex items-center gap-4">
           <Button
             variant="default"
-            className="flex items-center gap-2 rounded-xl border-none bg-gradient-to-r from-[#dd00ac] via-[#7130c3] to-[#410093]"
+            className="flex items-center gap-2 rounded-xl border-none bg-linear-to-r from-[#dd00ac] via-[#7130c3] to-[#410093]"
             onClick={logout}
           >
             <LogOut className="h-5 w-5" />
@@ -62,7 +62,7 @@ export default function DesktopNav() {
       ) : (
         <Button
           variant="default"
-          className="mr-10 flex items-center gap-2 rounded-xl border-none bg-gradient-to-r from-[#dd00ac] via-[#7130c3] to-[#410093]"
+          className="mr-10 flex items-center gap-2 rounded-xl border-none bg-linear-to-r from-[#dd00ac] via-[#7130c3] to-[#410093]"
           onClick={login}
         >
           Sign in with Google
