@@ -25,9 +25,9 @@ export default function Card({
           </div>
           <div className="mb-0 lg:mb-10">
             <Button
-              className="rounded-full bg-blue-500 px-4 py-2 text-sm font-semibold text-white transition-colors duration-150 ease-in-out hover:bg-blue-600 sm:text-base md:text-lg xl:text-xl"
               type="button"
               onClick={() => navigate("/generate")}
+              className="rounded-full bg-blue-500 px-4 py-2 text-sm font-semibold text-white transition-colors duration-150 ease-in-out hover:bg-blue-600 sm:text-base md:text-lg xl:text-xl"
             >
               Generate a video
             </Button>

@@ -39,8 +39,8 @@ export default function Video() {
       </h2>
       {!isEditing && (
         <Button
-          onClick={() => setIsEditing(true)}
           disabled={loading}
+          onClick={() => setIsEditing(true)}
           className="absolute right-2 top-5 text-gray-400 transition-colors hover:text-gray-200"
         >
           <Edit className="h-5 w-5" />

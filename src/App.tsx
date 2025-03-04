@@ -1,14 +1,19 @@
 import Home from "@/components/Home";
 import MultiForm from "@/components/MultiForm";
 import NavBar from "@/components/Navbar";
-import MultiFormProvider from "@/context/MultiFormContext";
 import { Toaster } from "react-hot-toast";
+import { MultiFormProvider } from "@/context/MultiFormContext";
+import { NavigationProvider } from "@/context/NavigationContext";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <NavBar />,
+    element: (
+      <NavigationProvider>
+        <NavBar />
+      </NavigationProvider>
+    ),
     children: [
       {
         index: true,

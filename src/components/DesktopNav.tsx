@@ -5,11 +5,12 @@ import { LogOut } from "lucide-react";
 import { getInitials } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/context/AuthContext";
-import { NavigationHandler } from "@/types/types";
+import { useNavigation } from "@/context/NavigationContext";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
-export default function DesktopNav({ handleNavigation }: NavigationHandler) {
+export default function DesktopNav() {
   const { login, user, logout } = useAuth();
+  const { handleNavigation } = useNavigation();
 
   return (
     <div className="hidden h-16 items-center justify-between md:flex">
@@ -47,8 +48,8 @@ export default function DesktopNav({ handleNavigation }: NavigationHandler) {
         <div className="flex items-center gap-4">
           <Button
             variant="default"
-            className="bg-linear-to-r flex items-center gap-2 rounded-xl border-none from-[#dd00ac] via-[#7130c3] to-[#410093]"
             onClick={logout}
+            className="bg-linear-to-r flex items-center gap-2 rounded-xl border-none from-[#dd00ac] via-[#7130c3] to-[#410093]"
           >
             <LogOut className="h-5 w-5" />
             Logout
@@ -63,8 +64,8 @@ export default function DesktopNav({ handleNavigation }: NavigationHandler) {
       ) : (
         <Button
           variant="default"
-          className="bg-linear-to-r mr-10 flex items-center gap-2 rounded-xl border-none from-[#dd00ac] via-[#7130c3] to-[#410093]"
           onClick={login}
+          className="bg-linear-to-r mr-10 flex items-center gap-2 rounded-xl border-none from-[#dd00ac] via-[#7130c3] to-[#410093]"
         >
           Sign in with Google
           <img src={GoogleIcon} alt="Google icon" className="h-5 w-5" />

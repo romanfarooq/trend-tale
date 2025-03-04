@@ -1,12 +1,12 @@
 import Icon from "/images/icon.png";
 import GoogleIcon from "/images/google-icon.png";
-import { useState } from "react";
+import { useState, MouseEvent } from "react";
 import { Link } from "react-router-dom";
 import { getInitials } from "@/lib/utils";
 import { useAuth } from "@/context/AuthContext";
-import { NavigationHandler } from "@/types/types";
 import { AlignJustify, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useNavigation } from "@/context/NavigationContext";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   Sheet,
@@ -15,11 +15,12 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 
-export default function MobileNav({ handleNavigation }: NavigationHandler) {
+export default function MobileNav() {
   const [isOpen, setIsOpen] = useState(false);
   const { login, logout, user } = useAuth();
+  const { handleNavigation } = useNavigation();
 
-  const handleClose: NavigationHandler["handleNavigation"] = (e, to) => {
+  const handleClose = (e: MouseEvent<HTMLAnchorElement>, to: string) => {
     setIsOpen(false);
     handleNavigation(e, to);
   };
@@ -42,8 +43,8 @@ export default function MobileNav({ handleNavigation }: NavigationHandler) {
       <Sheet open={isOpen} onOpenChange={setIsOpen}>
         <SheetTrigger asChild>
           <AlignJustify
-            className="mr-4 cursor-pointer md:hidden"
             onClick={() => setIsOpen(true)}
+            className="mr-4 cursor-pointer md:hidden"
           />
         </SheetTrigger>
         <SheetContent
@@ -59,27 +60,27 @@ export default function MobileNav({ handleNavigation }: NavigationHandler) {
 
           <nav className="mt-6 flex flex-col gap-y-10 text-center">
             <a
-              className="border-transparent text-2xl font-semibold text-white transition-colors duration-150 ease-in-out hover:bg-transparent hover:text-[#dd00ac] focus:bg-transparent focus:text-[#dd00ac] active:bg-transparent active:text-[#dd00ac]"
               onClick={(e) => handleClose(e, "/#home")}
+              className="border-transparent text-2xl font-semibold text-white transition-colors duration-150 ease-in-out hover:bg-transparent hover:text-[#dd00ac] focus:bg-transparent focus:text-[#dd00ac] active:bg-transparent active:text-[#dd00ac]"
             >
               Home
             </a>
             <a
-              className="border-transparent text-2xl font-semibold text-white transition-colors duration-150 ease-in-out hover:bg-transparent hover:text-[#dd00ac] focus:bg-transparent focus:text-[#dd00ac] active:bg-transparent active:text-[#dd00ac]"
               onClick={(e) => handleClose(e, "/#about")}
+              className="border-transparent text-2xl font-semibold text-white transition-colors duration-150 ease-in-out hover:bg-transparent hover:text-[#dd00ac] focus:bg-transparent focus:text-[#dd00ac] active:bg-transparent active:text-[#dd00ac]"
             >
               About
             </a>
             <a
-              className="border-transparent text-2xl font-semibold text-white transition-colors duration-150 ease-in-out hover:bg-transparent hover:text-[#dd00ac] focus:bg-transparent focus:text-[#dd00ac] active:bg-transparent active:text-[#dd00ac]"
               onClick={(e) => handleClose(e, "/#faqs")}
+              className="border-transparent text-2xl font-semibold text-white transition-colors duration-150 ease-in-out hover:bg-transparent hover:text-[#dd00ac] focus:bg-transparent focus:text-[#dd00ac] active:bg-transparent active:text-[#dd00ac]"
             >
               FAQs
             </a>
             <Link
               to="/generate"
-              className="border-transparent text-2xl font-semibold text-white transition-colors duration-150 ease-in-out hover:bg-transparent hover:text-[#dd00ac] focus:bg-transparent focus:text-[#dd00ac] active:bg-transparent active:text-[#dd00ac]"
               onClick={() => setIsOpen(false)}
+              className="border-transparent text-2xl font-semibold text-white transition-colors duration-150 ease-in-out hover:bg-transparent hover:text-[#dd00ac] focus:bg-transparent focus:text-[#dd00ac] active:bg-transparent active:text-[#dd00ac]"
             >
               Generate Video
             </Link>
@@ -89,8 +90,8 @@ export default function MobileNav({ handleNavigation }: NavigationHandler) {
             {user ? (
               <Button
                 variant="default"
-                className="bg-linear-to-r flex items-center gap-2 rounded-xl border-none from-[#dd00ac] via-[#7130c3] to-[#410093] text-xl text-white"
                 onClick={logout}
+                className="bg-linear-to-r flex items-center gap-2 rounded-xl border-none from-[#dd00ac] via-[#7130c3] to-[#410093] text-xl text-white"
               >
                 <LogOut className="h-5 w-5" />
                 Logout
@@ -98,8 +99,8 @@ export default function MobileNav({ handleNavigation }: NavigationHandler) {
             ) : (
               <Button
                 variant="default"
-                className="bg-linear-to-r flex items-center gap-2 rounded-xl border-none from-[#dd00ac] via-[#7130c3] to-[#410093] text-xl text-white"
                 onClick={login}
+                className="bg-linear-to-r flex items-center gap-2 rounded-xl border-none from-[#dd00ac] via-[#7130c3] to-[#410093] text-xl text-white"
               >
                 Sign in with Google
                 <img src={GoogleIcon} alt="Google icon" className="h-5 w-5" />

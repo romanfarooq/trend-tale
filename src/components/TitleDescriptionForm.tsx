@@ -50,15 +50,15 @@ export default function TitleDescriptionForm({
       {isEditing && (
         <div className="mt-4 flex gap-2">
           <Button
-            onClick={() => setIsEditing(false)}
             variant="default"
+            onClick={() => setIsEditing(false)}
             className="bg-indigo-600 text-white hover:bg-indigo-700"
           >
             Save
           </Button>
           <Button
-            onClick={() => setIsEditing(false)}
             variant="secondary"
+            onClick={() => setIsEditing(false)}
             className="bg-gray-700 text-gray-300 hover:bg-gray-600"
           >
             Cancel

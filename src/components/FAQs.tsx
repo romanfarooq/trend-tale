@@ -8,33 +8,27 @@ import {
 const questionsData = [
   {
     question: "How does TrendTale work?",
-    answer:
-      "TrendTale allows users to select from trending topics, let AI craft captivating stories, turn those stories into videos, and automatically upload them to YouTube. It's a seamless process designed to streamline content creation.",
+    answer: "TrendTale allows users to select from trending topics, let AI craft captivating stories, turn those stories into videos, and automatically upload them to YouTube. It's a seamless process designed to streamline content creation.",
   },
   {
     question: "What kind of topics can I choose from?",
-    answer:
-      "You can select from a wide range of trending topics that are curated to be relevant and engaging. Our AI ensures that the stories created are tailored to the selected topics.",
+    answer: "You can select from a wide range of trending topics that are curated to be relevant and engaging. Our AI ensures that the stories created are tailored to the selected topics.",
   },
   {
     question: "How long does it take to generate a video?",
-    answer:
-      "The time it takes to generate a video depends on the complexity of the story and video. Typically, the process is quick, allowing you to go from topic selection to video upload in a matter of minutes.",
+    answer: "The time it takes to generate a video depends on the complexity of the story and video. Typically, the process is quick, allowing you to go from topic selection to video upload in a matter of minutes.",
   },
   {
     question: "Can I customize the generated videos?",
-    answer:
-      "Currently, the videos are generated automatically based on the story crafted by AI. However, we are working on adding customization features in future updates.",
+    answer: "Currently, the videos are generated automatically based on the story crafted by AI. However, we are working on adding customization features in future updates.",
   },
   {
     question: "Is there a limit to the number of videos I can create?",
-    answer:
-      "There is no limit to the number of videos you can create with TrendTale. Feel free to generate as many videos as you need.",
+    answer: "There is no limit to the number of videos you can create with TrendTale. Feel free to generate as many videos as you need.",
   },
   {
     question: "How does TrendTale handle copyright and content ownership?",
-    answer:
-      "All generated content is owned by you. TrendTale ensures that your videos and stories are unique and compliant with copyright regulations.",
+    answer: "All generated content is owned by you. TrendTale ensures that your videos and stories are unique and compliant with copyright regulations.",
   },
 ];
 
@@ -57,7 +51,7 @@ export default function FAQs() {
               key={index}
               value={`faq-${index}`}
             >
-              <AccordionTrigger className="text-start text-base font-semibold text-[#7064e9] hover:no-underline sm:text-lg md:text-xl">
+              <AccordionTrigger className="cursor-pointer text-start text-base font-semibold text-[#7064e9] hover:no-underline sm:text-lg md:text-xl">
                 {item.question}
               </AccordionTrigger>
               <AccordionContent className="text-start text-[#7376aa]">

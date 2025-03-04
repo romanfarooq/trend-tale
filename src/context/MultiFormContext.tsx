@@ -43,7 +43,7 @@ type MultiFormContextType = {
 
 const MultiFormContext = createContext<MultiFormContextType | null>(null);
 
-export default function MultiFormProvider({
+export function MultiFormProvider({
   children,
 }: {
   children: ReactNode;

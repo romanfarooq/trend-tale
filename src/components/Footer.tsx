@@ -1,8 +1,10 @@
 import AppStoreImage from "/images/appstore.png";
 import GooglePlayImage from "/images/googleplay.png";
 import { Link } from "react-router-dom";
+import { useNavigation } from "@/context/NavigationContext";
 
 export default function Footer() {
+  const { handleNavigation } = useNavigation();
   return (
     <footer className="bg-gray-900 px-6 py-16 text-white md:px-16">
       <div className="flex flex-col justify-between gap-8 md:flex-row">
@@ -46,24 +48,24 @@ export default function Footer() {
             <ul className="space-y-2">
               <li>
                 <a
-                  href="#home"
-                  className="border-transparent text-gray-400 transition-colors duration-150 ease-in-out hover:bg-transparent hover:text-[#dd00ac] focus:bg-transparent focus:text-[#dd00ac] active:bg-transparent active:text-[#dd00ac]"
+                  onClick={(e) => handleNavigation(e, "/#home")}
+                  className="cursor-pointer border-transparent text-gray-400 transition-colors duration-150 ease-in-out hover:bg-transparent hover:text-[#dd00ac] focus:bg-transparent focus:text-[#dd00ac] active:bg-transparent active:text-[#dd00ac]"
                 >
                   Home
                 </a>
               </li>
               <li>
                 <a
-                  href="#faq"
-                  className="border-transparent text-gray-400 transition-colors duration-150 ease-in-out hover:bg-transparent hover:text-[#dd00ac] focus:bg-transparent focus:text-[#dd00ac] active:bg-transparent active:text-[#dd00ac]"
+                  onClick={(e) => handleNavigation(e, "/#faq")}
+                  className="cursor-pointer border-transparent text-gray-400 transition-colors duration-150 ease-in-out hover:bg-transparent hover:text-[#dd00ac] focus:bg-transparent focus:text-[#dd00ac] active:bg-transparent active:text-[#dd00ac]"
                 >
                   FAQ
                 </a>
               </li>
               <li>
                 <a
-                  href="#about"
-                  className="border-transparent text-gray-400 transition-colors duration-150 ease-in-out hover:bg-transparent hover:text-[#dd00ac] focus:bg-transparent focus:text-[#dd00ac] active:bg-transparent active:text-[#dd00ac]"
+                  onClick={(e) => handleNavigation(e, "/#about")}
+                  className="cursor-pointer border-transparent text-gray-400 transition-colors duration-150 ease-in-out hover:bg-transparent hover:text-[#dd00ac] focus:bg-transparent focus:text-[#dd00ac] active:bg-transparent active:text-[#dd00ac]"
                 >
                   About
                 </a>
