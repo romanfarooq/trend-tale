@@ -1,12 +1,12 @@
 import Icon from "/images/icon.png";
 import GoogleIcon from "/images/google-icon.png";
-import { useState, MouseEvent } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { getInitials } from "@/lib/utils";
 import { useAuth } from "@/context/AuthContext";
 import { AlignJustify, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useNavigation } from "@/context/NavigationContext";
+import { useNavigation, NavigationHandler } from "@/context/NavigationContext";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   Sheet,
@@ -20,7 +20,7 @@ export default function MobileNav() {
   const { login, logout, user } = useAuth();
   const { handleNavigation } = useNavigation();
 
-  const handleClose = (e: MouseEvent<HTMLAnchorElement>, to: string) => {
+  const handleClose: NavigationHandler["handleNavigation"] = (e, to) => {
     setIsOpen(false);
     handleNavigation(e, to);
   };

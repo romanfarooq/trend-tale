@@ -1,11 +1,11 @@
-import { createContext, useContext, ReactNode, MouseEvent } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { createContext, useContext, ReactNode, MouseEvent } from "react";
 
-type NavigationHandler = {
+export type NavigationHandler = {
   handleNavigation: (e: MouseEvent<HTMLAnchorElement>, to: string) => void;
 };
 
-type NavigationContextType = NavigationHandler & {
+export type NavigationContextType = NavigationHandler & {
   scrollToElement: (id: string) => void;
 };
 
@@ -22,7 +22,7 @@ export function NavigationProvider({ children }: { children: ReactNode }) {
     }
   };
 
-  const handleNavigation = (e: MouseEvent<HTMLAnchorElement>, to: string) => {
+  const handleNavigation: NavigationHandler["handleNavigation"] = (e, to) => {
     e.preventDefault();
 
     if (to.includes("#")) {
